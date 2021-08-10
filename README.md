@@ -1,2 +1,2 @@
 # ReactJS
-React Apps
+Just a starter React Application
