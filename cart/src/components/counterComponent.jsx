@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 class Counter extends Component {
   state = {
-    count: 0,
+    value: this.props.counter.value, //to keep things dynamic
     tags: ["tag1", "tag2", "tag3"],
   };
 
@@ -18,6 +18,8 @@ class Counter extends Component {
   //   render() {
   //     return (
   //       <div>
+  //    {this.state.tags.length === 0 && <center>Map some tags</center>}
+  //        {this.populateTags()}
   //         <span className={this.findBadgeCls()}>{this.findCounter()}</span>
   //         <button className="btn btn-secondary btn-sm m-2">Increment</button>
   //         <ul>
@@ -30,40 +32,56 @@ class Counter extends Component {
   render() {
     return (
       <div>
-        {this.state.tags.length === 0 && <center>Map some tags</center>}
-        {this.populateTags()}
+        
         <span className={this.findBadgeCls()}>{this.findCounter()}</span>
         <button
           className="btn btn-secondary btn-sm m-2"
           onClick={this.handleInc}
+          disabled={this.state.value >= 5}
         >
           Increment
         </button>
         <button
-          className="btn btn-secondary btn-sm m-2"
-          onClick={this.handleDec}
-          disabled = {this.state.count < 1}
+          className="btn btn-warning btn-sm m-2"
+          onClick={() => {this.handleDec("Passing arguements")}}
+          disabled = {this.state.value < 1}
         >
           Decrement
         </button>
         <button
-          className="btn btn-secondary btn-sm m-2"
+          className="btn btn-danger btn-sm m-2"
           onClick={this.reset}
-          disabled = {this.state.count < 1}
+          disabled = {this.state.value < 1}
         >
           Reset
+        </button>
+        <button
+          className="btn btn-danger btn-sm m-2"
+          onClick={() => {
+            this.props.onDelete(this.props.counter.id); 
+            this.checkState()}}
+          disabled = {this.state.value < 1}
+        >
+          Deleting from another component
         </button>
       </div>
     );
   }
 
+  checkState = () => {
+    console.log(this.state.value + '\n' + this.props.counter.value);
+    this.setState({value : this.props.counter.value});
+  }
+
   findCounter() {
-    return this.state.count === 0 ? "Zero" : this.state.count;
+    let {value} = this.state;
+    return value === 0 ? "Zero" : value;
   }
 
   findBadgeCls() {
+    let {value} = this.state;
     let badgeCls = "badge m-2 badge-";
-    badgeCls += this.state.count === 0 ? "warning" : "primary";
+    badgeCls += value === 0 ? "warning" : "primary";
     return badgeCls;
   }
 
@@ -81,15 +99,15 @@ class Counter extends Component {
 
   handleInc = () => {
     //this.state.count += 1;
-    this.setState({ count: this.state.count + 1 });
+    this.setState({ value: this.state.value + 1 });
   };
 
-  handleDec = () => {
-    this.setState({ count: this.state.count - 1 });
+  handleDec = (x) => {
+    this.setState({ value: this.state.value - 1 });
   };
 
   reset = () => {
-    this.setState({count : 0});
+    this.setState({value : 0});
   }
 
 }
