@@ -22,13 +22,24 @@ class CounterList extends Component {
         this.setState({count});
     }
 
+    handleInc = (count) => {
+        let cnt = [...this.state.count];
+        let idx = cnt.indexOf(count);
+        cnt[idx].value += 1;
+        console.log(cnt);
+        this.setState({count : cnt});
+    }
+
     render() { 
         return (
             <div>
                 {
                     //this.state.count.map(c => <Counter key={ c.id }/>)
                     // Now we can add value of count.value in the component
-                    this.state.count.map(counter => (<Counter key={counter.id} counter={counter} onDelete={this.handleDelete} />))
+                    this.state.count.map(counter => (<Counter key={counter.id} 
+                        counter={counter} 
+                        onDelete={this.handleDelete}
+                        onIncrement={this.handleInc} />))
                 }
             </div>
         );
