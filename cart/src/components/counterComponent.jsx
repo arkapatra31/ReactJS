@@ -44,26 +44,28 @@ class Counter extends Component {
         </button>
         <button
           className="btn btn-warning btn-sm m-2"
-          onClick={() => {this.handleDec("Passing arguements")}}
+          onClick={() => {this.props.onDecrement(this.props.counter.id)}}
           disabled = {this.state.value < 1}
         >
           Decrement
         </button>
         <button
           className="btn btn-danger btn-sm m-2"
-          onClick={this.reset}
-          disabled = {this.state.value < 1}
+          onClick={() => {  
+            this.props.onDelete(this.props.counter.id); 
+            }}
+          disabled = {this.props.counter.value < 1}
         >
-          Reset
+          Delete
         </button>
         <button
           className="btn btn-danger btn-sm m-2"
           onClick={() => {
-            this.props.onDelete(this.props.counter.id); 
-            this.checkState()}}
-          disabled = {this.state.value < 1}
+            this.props.onReset(this.props.counter); 
+            }}
+          disabled = {this.props.counter.value < 1}
         >
-          Deleting from another component
+          Reset
         </button>
       </div>
     );
@@ -80,7 +82,7 @@ class Counter extends Component {
   }
 
   findBadgeCls() {
-    let {value} = this.state;
+    let {value} = this.props.counter;
     let badgeCls = "badge m-2 badge-";
     badgeCls += value === 0 ? "warning" : "primary";
     return badgeCls;
@@ -96,19 +98,6 @@ class Counter extends Component {
         <li key={this.state.tags.indexOf(tag)}>{tag}</li>
       </ul>
     ));
-  }
-
-  handleInc = () => {
-    //this.state.count += 1;
-    this.setState({ value: this.state.value + 1 });
-  };
-
-  handleDec = (x) => {
-    this.setState({ value: this.state.value - 1 });
-  };
-
-  reset = () => {
-    this.setState({value : 0});
   }
 
 }

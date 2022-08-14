@@ -11,8 +11,14 @@ class CounterList extends Component {
             ]
      }; 
 
-    handleDelete = (counterID) => {
-        console.log("Decremental ID --- ", counterID);
+    handleInc = (count) => {
+        let cnt = [...this.state.count];
+        let idx = cnt.indexOf(count);
+        cnt[idx].value += 1;
+        this.setState({count : cnt});
+    }
+
+    handleDec = (counterID) => {
         let count = this.state.count;
         count.map((c) => {
             if(c.id === counterID){
@@ -22,12 +28,21 @@ class CounterList extends Component {
         this.setState({count});
     }
 
-    handleInc = (count) => {
+    handleDelete = (counterID) => {
         let cnt = [...this.state.count];
-        let idx = cnt.indexOf(count);
-        cnt[idx].value += 1;
-        console.log(cnt);
+        cnt.map((c) => {
+            if(c.id === counterID){
+                cnt.splice(c.id, 1);
+            }
+        });
         this.setState({count : cnt});
+    }
+
+    handleReset = (counter) => {
+        let cnt = [...this.state.count];
+        let idx = cnt.indexOf(counter);
+        cnt[idx].value = 0;
+        this.setState({count:cnt});
     }
 
     render() { 
@@ -38,8 +53,10 @@ class CounterList extends Component {
                     // Now we can add value of count.value in the component
                     this.state.count.map(counter => (<Counter key={counter.id} 
                         counter={counter} 
+                        onIncrement={this.handleInc}
+                        onDecrement={this.handleDec}
                         onDelete={this.handleDelete}
-                        onIncrement={this.handleInc} />))
+                        onReset = {this.handleReset} />))
                 }
             </div>
         );
