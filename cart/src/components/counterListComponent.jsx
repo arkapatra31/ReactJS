@@ -10,10 +10,10 @@ class CounterList extends Component {
                     // Now we can add value of count.value in the component
                     this.props.counters.map(counter => (<Counter key={counter.id} 
                         counter={counter} 
-                        onIncrement={this.props.handleInc}
-                        onDecrement={this.props.handleDec}
-                        onDelete={this.props.handleDelete}
-                        onReset = {this.props.handleReset} />))
+                        onIncrement={this.props.inc}
+                        onDecrement={this.props.dec}
+                        onDelete={this.props.del}
+                        onReset = {this.props.res} />))
                 }
             </div>
         );

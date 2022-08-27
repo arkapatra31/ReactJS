@@ -36,7 +36,7 @@ class Counter extends Component {
         <span className={this.findBadgeCls()}>{this.findCounter()}</span>
         <button
           className="btn btn-secondary btn-sm m-2"
-          //onClick={this.handleInc}
+          //onClick={this.props.onIncrement}
           onClick={() => this.props.onIncrement(this.props.counter)} //this is removing local state
           disabled={this.props.counter.value >= 5}
         >
