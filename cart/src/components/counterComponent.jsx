@@ -31,8 +31,7 @@ class Counter extends Component {
 
   render() {
     return (
-      <div>
-        
+      <div style={{position : "relative", marginLeft : "500px", marginTop : "10px"}}>
         <span className={this.findBadgeCls()}>{this.findCounter()}</span>
         <button
           className="btn btn-secondary btn-sm m-2"
@@ -40,14 +39,14 @@ class Counter extends Component {
           onClick={() => this.props.onIncrement(this.props.counter)} //this is removing local state
           disabled={this.props.counter.value >= 5}
         >
-          Increment
+          +
         </button>
         <button
           className="btn btn-warning btn-sm m-2"
           onClick={() => {this.props.onDecrement(this.props.counter.id)}}
           disabled = {this.state.value < 1}
         >
-          Decrement
+          -
         </button>
         <button
           className="btn btn-danger btn-sm m-2"
@@ -67,6 +66,7 @@ class Counter extends Component {
         >
           Reset
         </button>
+        <span className="badge badge-pill badge-dark">Product{this.props.counter.id}</span>
       </div>
     );
   }
