@@ -1,25 +1,66 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {Component} from 'react';
+import CounterList from "./components/counterListComponent";
+import NavBar from "./components/navBarComponent";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Main extends Component {
+  state = { 
+    count : [
+            {id : 0, value : 0},
+            {id : 1, value : 1},
+            {id : 2, value : 2},
+            {id : 3, value : 3},
+            {id : 4, value : 4}
+        ]
+ }; 
+
+handleInc = (count) => {
+    let cnt = [...this.state.count];
+    let idx = cnt.indexOf(count);
+    cnt[idx].value += 1;
+    this.setState({count : cnt});
 }
 
-export default App;
+handleDec = (counterID) => {
+    let count = this.state.count;
+    count.map((c) => {
+        if(c.id === counterID){
+            c.value -= 1;
+        }
+    });
+    this.setState({count});
+}
+
+handleDelete = (counterID) => {
+    let cnt = [...this.state.count];
+    cnt.map((c) => {
+        if(c.id === counterID){
+            cnt.splice(c.id, 1);
+        }
+    });
+    this.setState({count : cnt});
+}
+
+handleReset = (counter) => {
+    let cnt = [...this.state.count];
+    let idx = cnt.indexOf(counter);
+    cnt[idx].value = 0;
+    this.setState({count:cnt});
+}
+  render() { 
+    return (
+      <>
+      <NavBar />
+      <CounterList 
+            counters = {this.state.count}
+            onIncrement={this.props.handleInc}
+            onDecrement={this.props.handleDec}
+            onDelete={this.props.handleDelete}
+            onReset = {this.props.handleReset}
+      />
+      </>
+    );
+  }
+}
+ 
+export default Main;
