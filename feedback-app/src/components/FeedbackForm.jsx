@@ -33,6 +33,8 @@ function FeedbackForm({addNewFeedback}) {
         }
         addNewFeedback(newFeedBack);
         setText('');
+        setRating(10);
+        setBtnDisabled('true');
     }
   }
 
