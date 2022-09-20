@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import Card from "../components/shared/Card";
 function AboutPage() {
   return (
@@ -8,7 +9,7 @@ function AboutPage() {
         <p>version : 1.0</p>
         <p>This is the about page for the FeedBack UI App</p>
         <p>
-          <a href="/">Return to Home</a>
+          <Link to="/">Return to Home</Link>
         </p>
       </div>
     </Card>

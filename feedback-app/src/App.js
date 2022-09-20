@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from 'react-router-dom';
 import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FeedbackData from "../src/data/FeedbackData";
@@ -8,6 +9,9 @@ import FeedbackList from "./components/FeedbackList";
 import FeedbackStats from "./components/FeedbackStats";
 import FeedbackForm from "./components/FeedbackForm";
 import AboutPage from "./pages/AboutPage";
+import AboutIconLink from "./components/AboutIconLink";
+import TestPost from "./components/TestPost";
+import Post from "./components/Post";
 
 function App() {
   const [feedbackData, setFeedbackData] = useState(FeedbackData);
@@ -45,7 +49,10 @@ function App() {
             }
           ></Route>
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/testpost/:id/:name" element = {<TestPost />} />
+          <Route path="/post" element={<Post />} />
         </Routes>
+        <Link to = '/about'><AboutIconLink /></Link>
       </div>
     </Router>
   );
