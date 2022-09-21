@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import FeedbackData from "../src/data/FeedbackData";
@@ -12,6 +12,9 @@ import AboutPage from "./pages/AboutPage";
 import AboutIconLink from "./components/AboutIconLink";
 import TestPost from "./components/TestPost";
 import Post from "./components/Post";
+
+//importing for Context
+import { FeedbackProvider } from "./context/FeedbackContext";
 
 function App() {
   const [feedbackData, setFeedbackData] = useState(FeedbackData);
@@ -28,33 +31,39 @@ function App() {
   };
 
   return (
-    <Router>
-      <Header />
-      <div className="container">
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <>
-                <FeedbackForm
-                  addNewFeedback={(review) => addNewFeedback(review)}
-                />
-                <FeedbackStats feedBack={feedbackData} />
-                <FeedbackList
-                  feedBack={feedbackData}
-                  deleteFeedBack={(id) => deleteSelectedFeedBack(id)}
-                />
-              </>
-            }
-          ></Route>
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/testpost/:id/:name" element = {<TestPost />} />
-          <Route path="/post" element={<Post />} />
-        </Routes>
-        <Link to = '/about'><AboutIconLink /></Link>
-      </div>
-    </Router>
+    <FeedbackProvider>
+      <Router>
+        <Header />
+        <div className="container">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <>
+                  <FeedbackForm
+                    addNewFeedback={(review) => addNewFeedback(review)}
+                  />
+                  <FeedbackStats
+                  //feedBack={feedbackData} passed in context
+                  />
+                  <FeedbackList
+                    //feedBack={feedbackData} passed in context
+                    deleteFeedBack={(id) => deleteSelectedFeedBack(id)}
+                  />
+                </>
+              }
+            ></Route>
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/testpost/:id/:name" element={<TestPost />} />
+            <Route path="/post" element={<Post />} />
+          </Routes>
+          <Link to="/about">
+            <AboutIconLink />
+          </Link>
+        </div>
+      </Router>
+    </FeedbackProvider>
   );
 }
 

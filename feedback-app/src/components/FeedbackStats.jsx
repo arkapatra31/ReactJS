@@ -1,6 +1,11 @@
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
+//introducing context
+import FeedbackContext from "../context/FeedbackContext";
+import { useContext } from "react";
 
-function FeedbackStats({ feedBack }) {
+
+function FeedbackStats(/**{ feedBack }**/) {
+  const {feedBack} = useContext(FeedbackContext);
   let avg = (
     feedBack.reduce((acc, cur) => {
       return acc + cur.rating;
@@ -17,15 +22,15 @@ function FeedbackStats({ feedBack }) {
   );
 }
 
-FeedbackStats.propTypes = {
-  //feedBack : PropTypes.array
-  feedBack: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-    })
-  ),
-};
+// FeedbackStats.propTypes = {
+//   //feedBack : PropTypes.array
+//   feedBack: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       rating: PropTypes.number.isRequired,
+//       text: PropTypes.string.isRequired,
+//     })
+//   ),
+// };
 
 export default FeedbackStats;

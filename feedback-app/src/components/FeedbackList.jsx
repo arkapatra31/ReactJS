@@ -1,8 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import FeedbackItem from "./FeedbackItem";
-export default function FeedbackList({ feedBack, deleteFeedBack }) {
-  if (feedBack === null || feedBack.length === 0) {
+
+//introducing context
+import FeedbackContext from "../context/FeedbackContext";
+import { useContext } from "react";
+
+export default function FeedbackList({ /**feedBack,**/ deleteFeedBack }) {
+
+  const {feedBack} = useContext(FeedbackContext);
+
+  if (!feedBack || feedBack.length === 0) {
     return <p>No feedback yet !!!</p>;
   }
 
@@ -38,13 +46,13 @@ export default function FeedbackList({ feedBack, deleteFeedBack }) {
   // );
 }
 
-FeedbackList.propTypes = {
-  //feedBack : PropTypes.array
-  feedBack: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-    })
-  ),
-};
+// FeedbackList.propTypes = {
+//   //feedBack : PropTypes.array
+//   feedBack: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       rating: PropTypes.number.isRequired,
+//       text: PropTypes.string.isRequired,
+//     })
+//   ),
+// };
