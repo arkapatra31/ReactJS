@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import FeedbackData from "../src/data/FeedbackData";
 import Header from "./components/Header";
 //import FeedbackItem from "./components/FeedbackItem";
 import FeedbackList from "./components/FeedbackList";
@@ -17,18 +14,20 @@ import Post from "./components/Post";
 import { FeedbackProvider } from "./context/FeedbackContext";
 
 function App() {
-  const [feedbackData, setFeedbackData] = useState(FeedbackData);
+  //const [feedbackData, setFeedbackData] = useState(FeedbackData);
 
-  const deleteSelectedFeedBack = (id) => {
-    if (window.confirm("Are you sure you want to delete?")) {
-      setFeedbackData(feedbackData.filter((data) => data.id !== id));
-    }
-  };
+  //This delete method is moved to context
+  // const deleteSelectedFeedBack = (id) => {
+  //   if (window.confirm("Are you sure you want to delete?")) {
+  //     setFeedbackData(feedbackData.filter((data) => data.id !== id));
+  //   }
+  // };
 
-  const addNewFeedback = (newFeedBack) => {
-    newFeedBack.id = parseInt(uuidv4());
-    setFeedbackData([newFeedBack, ...feedbackData]);
-  };
+  //This add method is moved to context
+  // const addNewFeedback = (newFeedBack) => {
+  //   newFeedBack.id = parseInt(uuidv4());
+  //   setFeedbackData([newFeedBack, ...feedbackData]);
+  // };
 
   return (
     <FeedbackProvider>
@@ -42,14 +41,14 @@ function App() {
               element={
                 <>
                   <FeedbackForm
-                    addNewFeedback={(review) => addNewFeedback(review)}
+                    //addNewFeedback={(review) => addNewFeedback(review)}
                   />
                   <FeedbackStats
                   //feedBack={feedbackData} passed in context
                   />
                   <FeedbackList
                     //feedBack={feedbackData} passed in context
-                    deleteFeedBack={(id) => deleteSelectedFeedBack(id)}
+                    //deleteFeedBack={(id) => deleteSelectedFeedBack(id)} passed in context
                   />
                 </>
               }

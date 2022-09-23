@@ -6,7 +6,7 @@ import FeedbackItem from "./FeedbackItem";
 import FeedbackContext from "../context/FeedbackContext";
 import { useContext } from "react";
 
-export default function FeedbackList({ /**feedBack,**/ deleteFeedBack }) {
+export default function FeedbackList({ /**feedBack,deleteFeedBack **/}) {
 
   const {feedBack} = useContext(FeedbackContext);
 
@@ -24,11 +24,12 @@ export default function FeedbackList({ /**feedBack,**/ deleteFeedBack }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            layout
           >
             <FeedbackItem
               key={item.id}
               item={item}
-              handleDelete={deleteFeedBack}
+              // handleDelete={deleteFeedBack}
             />
           </motion.div>
         ))}
