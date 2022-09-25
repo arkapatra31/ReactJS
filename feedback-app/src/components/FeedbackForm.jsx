@@ -53,7 +53,7 @@ function FeedbackForm(
       }
       setText("");
       setRating(10);
-      setBtnDisabled("true");
+      setBtnDisabled(true);
     }
   };
 

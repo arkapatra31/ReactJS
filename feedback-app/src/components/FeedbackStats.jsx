@@ -3,9 +3,8 @@
 import FeedbackContext from "../context/FeedbackContext";
 import { useContext } from "react";
 
-
 function FeedbackStats(/**{ feedBack }**/) {
-  const {feedBack} = useContext(FeedbackContext);
+  const { feedBack, isLoading } = useContext(FeedbackContext);
   let avg = (
     feedBack.reduce((acc, cur) => {
       return acc + cur.rating;
@@ -14,7 +13,9 @@ function FeedbackStats(/**{ feedBack }**/) {
     .toFixed(1)
     .replace(/[.]0/, "");
 
-  return (
+  return isLoading ? (
+   <></>
+  ) : (
     <div className="feedback-stats">
       <h4>{feedBack.length} Reviews</h4>
       <h4>{isNaN(avg) ? 0 : avg} Average Rating</h4>
