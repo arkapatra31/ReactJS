@@ -3,7 +3,7 @@ import GithubContext from "../../context/github/GithubContext";
 function UserSearch() {
   const [text, setText] = useState("");
 
-  const {users} = useContext(GithubContext);
+  const { users, searchUsers } = useContext(GithubContext);
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -14,7 +14,7 @@ function UserSearch() {
     if (text === "") {
       alert("Cannot be empty");
     } else {
-      /** Search Users */
+      searchUsers(text);
       setText("");
     }
   };
