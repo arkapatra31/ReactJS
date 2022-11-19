@@ -4,21 +4,40 @@ import { ReactComponent as ExploreIcon } from "../assets/svg/exploreIcon.svg";
 import { ReactComponent as PersonIcon } from "../assets/svg/personOutlineIcon.svg";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const pathMatchRoute = (route) => {
+    if (route === location.pathname) return true;
+  };
+
   return (
     <footer className="navbar">
       <nav className="navbarNav">
         <ul className="navbarListItems">
-          <li className="navbarListItem">
-            <ExploreIcon fill="#2c2c2c" width="36px/" heigth="36px" />
-            <p>Explore</p>
+          <li className="navbarListItem" onClick={() => navigate("/")}>
+            <ExploreIcon
+              fill={pathMatchRoute("/") ? "#2c2c2c" : "#8f8f8f"}
+              width="36px/"
+              heigth="36px"
+            />
+            <p className= {pathMatchRoute('/') ? "navbarListItemActive" : "navbarList"} >Explore</p>
           </li>
-          <li className="navbarListItem">
-            <OfferIcon fill="#2c2c2c" width="36px/" heigth="36px" />
-            <p>Offer</p>
+          <li className="navbarListItem" onClick={() => navigate("/offers")}>
+            <OfferIcon
+              fill={pathMatchRoute("/offers") ? "#2c2c2c" : "#8f8f8f"}
+              width="36px/"
+              heigth="36px"
+            />
+            <p className= {pathMatchRoute('/offers') ? "navbarListItemActive" : "navbarList"}>Offer</p>
           </li>
-          <li className="navbarListItem">
-            <PersonIcon fill="#2c2c2c" width="36px/" heigth="36px" />
-            <p>Profile</p>
+          <li className="navbarListItem" onClick={() => navigate("/profile")}>
+            <PersonIcon
+              fill={pathMatchRoute("/profile") ? "#2c2c2c" : "#8f8f8f"}
+              width="36px/"
+              heigth="36px"
+            />
+            <p className= {pathMatchRoute('/profile') ? "navbarListItemActive" : "navbarList"}>Profile</p>
           </li>
         </ul>
       </nav>
